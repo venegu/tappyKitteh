@@ -2,7 +2,7 @@
 
 **Tappy Kitteh** is a Flappy Bird clone, but with a __cat hero__.
 
-<img src='hhttp://i.imgur.com/VXEqG.gif' title='Puss In Boots' width='' alt='Puss In Boots GIF' />
+<img src='http://i.imgur.com/VXEqG.gif' title='Puss In Boots' width='' alt='Puss In Boots GIF' />
 
 Time spent: **0.5** hours spent in total
 
