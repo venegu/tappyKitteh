@@ -9,8 +9,30 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    var kitteh = SKSpriteNode()
+    
+    /* NOTE TO SELF: Remember to swap out bird sprites with kittehHero */
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        
+        let kittehTexture1 = SKTexture(imageNamed: "flappy1.png")
+        let kittehTexture2 = SKTexture(imageNamed: "flappy2.png")
+        
+        // Creating animation
+        let animation = SKAction.animateWithTextures([kittehTexture1, kittehTexture2], timePerFrame: 0.25)
+        kitteh = SKSpriteNode(texture: kittehTexture1)
+        
+        // Repeating animation 
+        let flapping = SKAction.repeatActionForever(animation)
+        
+        // Setting sprite position to middle of the phone
+        kitteh.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        
+        kitteh.runAction(flapping)
+        
+        // Adding node to screen
+        self.addChild(kitteh)
         
     }
     
