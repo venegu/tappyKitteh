@@ -18,10 +18,6 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
-        // Setting background scene & kitteh zPosition so the image doesn't flicker
-        backgroundScene.zPosition = -1
-        kitteh.zPosition = 1
-        
         // Adding background scene
         let backgroundTexture = SKTexture(imageNamed: "bg.png")
         
@@ -30,6 +26,10 @@ class GameScene: SKScene {
         let moveBackgroundSceneRepeat = SKAction.repeatActionForever(SKAction.sequence([moveBackgroundSceneLeft, replaceBackgroundScene]))
         
         for index in 0...2 {
+            // Setting background scene & kitteh zPosition so the image doesn't flicker
+            backgroundScene.zPosition = -1
+            kitteh.zPosition = 1
+            
             backgroundScene = SKSpriteNode(texture: backgroundTexture)
             backgroundScene.position = CGPoint(x: backgroundTexture.size().width/2 + backgroundTexture.size().width * CGFloat(index), y: CGRectGetMidY(self.frame))
             backgroundScene.size.height = self.frame.height
