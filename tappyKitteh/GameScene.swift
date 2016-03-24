@@ -13,6 +13,7 @@ class GameScene: SKScene {
     var kitteh = SKSpriteNode()
     var backgroundScene = SKSpriteNode()
     var ground = SKNode()
+    var sky = SKNode()
     
     /* NOTE TO SELF: Remember to swap out bird sprites with kittehHero */
     
@@ -64,9 +65,14 @@ class GameScene: SKScene {
         ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, 1))
         ground.physicsBody?.dynamic = false
         
+        sky.position = CGPointMake(0, self.frame.size.height)
+        sky.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, 1))
+        sky.physicsBody?.dynamic = false
+        
         // Adding node to screen
         self.addChild(kitteh)
         self.addChild(ground)
+        self.addChild(sky)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
