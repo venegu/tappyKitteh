@@ -9,13 +9,26 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    
     var kitteh = SKSpriteNode()
+    var backgroundScene = SKSpriteNode()
     
     /* NOTE TO SELF: Remember to swap out bird sprites with kittehHero */
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
+        // Adding background scene
+        let backgroundTexture = SKTexture(imageNamed: "bg.png")
+        backgroundScene = SKSpriteNode(texture: backgroundTexture)
+        
+        backgroundScene.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        
+        backgroundScene.size.height = self.frame.height
+        
+        self.addChild(backgroundScene)
+        
+        // Adding cat (or bird atm)
         let kittehTexture1 = SKTexture(imageNamed: "flappy1.png")
         let kittehTexture2 = SKTexture(imageNamed: "flappy2.png")
         
