@@ -18,31 +18,41 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
+        // Setting background scene & kitteh zPosition so the image doesn't flicker
+        backgroundScene.zPosition = -1
+        kitteh.zPosition = 1
+        
         // Adding background scene
         let backgroundTexture = SKTexture(imageNamed: "bg.png")
-        backgroundScene = SKSpriteNode(texture: backgroundTexture)
         
-        backgroundScene.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        let moveBackgroundSceneLeft = SKAction.moveByX(-backgroundTexture.size().width, y: 0, duration: 9)
+        let replaceBackgroundScene = SKAction.moveByX(backgroundTexture.size().width, y: 0, duration: 0)
+        let moveBackgroundSceneRepeat = SKAction.repeatActionForever(SKAction.sequence([moveBackgroundSceneLeft, replaceBackgroundScene]))
         
-        backgroundScene.size.height = self.frame.height
-        
-        self.addChild(backgroundScene)
+        for index in 0...2 {
+            backgroundScene = SKSpriteNode(texture: backgroundTexture)
+            backgroundScene.position = CGPoint(x: backgroundTexture.size().width/2 + backgroundTexture.size().width * CGFloat(index), y: CGRectGetMidY(self.frame))
+            backgroundScene.size.height = self.frame.height
+            backgroundScene.runAction(moveBackgroundSceneRepeat)
+            
+            self.addChild(backgroundScene)
+        }
         
         // Adding cat (or bird atm)
         let kittehTexture1 = SKTexture(imageNamed: "flappy1.png")
         let kittehTexture2 = SKTexture(imageNamed: "flappy2.png")
         
         // Creating animation
-        let animation = SKAction.animateWithTextures([kittehTexture1, kittehTexture2], timePerFrame: 0.25)
+        let flappingAnimation = SKAction.animateWithTextures([kittehTexture1, kittehTexture2], timePerFrame: 0.25)
         kitteh = SKSpriteNode(texture: kittehTexture1)
         
         // Repeating animation 
-        let flapping = SKAction.repeatActionForever(animation)
+        let repeatedFlappingAnimation = SKAction.repeatActionForever(flappingAnimation)
         
         // Setting sprite position to middle of the phone
         kitteh.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         
-        kitteh.runAction(flapping)
+        kitteh.runAction(repeatedFlappingAnimation)
         
         // Adding node to screen
         self.addChild(kitteh)
