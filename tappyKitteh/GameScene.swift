@@ -71,6 +71,8 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
+        kitteh.physicsBody?.velocity = CGVectorMake(0, 0)
+        kitteh.physicsBody?.applyImpulse(CGVectorMake(0, 50))
         
        
     }
