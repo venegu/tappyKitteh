@@ -12,6 +12,7 @@ class GameScene: SKScene {
     
     var kitteh = SKSpriteNode()
     var backgroundScene = SKSpriteNode()
+    var ground = SKNode()
     
     /* NOTE TO SELF: Remember to swap out bird sprites with kittehHero */
     
@@ -38,7 +39,7 @@ class GameScene: SKScene {
             self.addChild(backgroundScene)
         }
         
-        // Adding cat (or bird atm)
+        // Adding sprite
         let kittehTexture1 = SKTexture(imageNamed: "flappy1.png")
         let kittehTexture2 = SKTexture(imageNamed: "flappy2.png")
         
@@ -54,9 +55,18 @@ class GameScene: SKScene {
         
         kitteh.runAction(repeatedFlappingAnimation)
         
+        // Physics to make sprite fall
+        kitteh.physicsBody = SKPhysicsBody(circleOfRadius: kittehTexture1.size().height/2)
+        kitteh.physicsBody?.dynamic = true
+        
+        // Ground for the sprite to fall on
+        ground.position = CGPointMake(0, 0)
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, 1))
+        ground.physicsBody?.dynamic = false
+        
         // Adding node to screen
         self.addChild(kitteh)
-        
+        self.addChild(ground)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
